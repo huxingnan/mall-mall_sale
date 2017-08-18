@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.mall.sale.mapper.SkuMapper">
+
+    <select id="select_sku_by_sku_id"  resultMap="select_sku_by_sku_id_resultMap" >
+			SELECT
+			   sku.Id sku_id,sku.product_amount sku_amount,
+			   sku.price sku_price,sku.sku_name,sku.address,sku.sku_sales,
+			
+			   sku.product_id  spu_id,  spu.product_image spu_image,spu.product_name spu_name,
+			   spu.product_description spu_desc,spu.class_number_1,spu.class_number_2,
+			
+			   spu.brand_id,brand.brand_name,
+			
+			   sku2.Id sku2_id,sku2.sku_name sku2_name,
+			   
+			   image.id image_id ,image.url image_url,
+			
+			   attr.id attr_id ,attr.attr_name,
+			
+			   skuav.attr_value_id,av.attr_value,av.attr_value_name
+			    
+			FROM
+			   t_mall_sku sku,
+			   t_mall_sku sku2,
+			   t_mall_product spu,
+			   t_mall_product_image image,
+			   t_mall_sku_attr_value skuav,
+			   t_mall_attr attr,
+			   t_mall_attr_value av,
+			   t_mall_brand brand
+			WHERE
+			   sku.product_id=spu.Id
+			AND
+			   sku.product_id=image.product_id
+			AND
+			   sku.Id=skuav.sku_id
+			AND
+			   skuav.attr_name_id=attr.Id
+			AND
+			   skuav.attr_value_id=av.Id
+			AND
+			   sku.product_id=sku2.product_id
+			AND
+			   spu.brand_id=brand.Id
+			AND
+			   sku.Id=#{sku_id}
+    </select>
+    
+    <resultMap type="com.sunshine.mall.sale.bean.Model_SKU_Detail" id="select_sku_by_sku_id_resultMap">
+       <id  property="sku_id" column="sku_id" />
+       <result property="sku_amount" column="sku_amount" />
+       <result property="sku_price" column="sku_price" />
+       <result property="sku_name" column="sku_name"  />
+       <result property="address" column="address"  />
+       <result property="sku_sales" column="sku_sales" />
+       <association property="spu" javaType="com.sunshine.mall.sale.bean.T_Spu" >
+          <id property="spu_id" column="spu_id" />
+          <result property="spu_image" column="spu_image" />
+          <result property="spu_name"  column="spu_name" />
+          <result property="spu_desc"  column="spu_desc" />
+          <result property="class_number_1" column="class_number_1"  />
+          <result property="class_number_2" column="class_number_2" />
+       </association>
+       
+       <association property="brand" javaType="com.sunshine.mall.sale.bean.T_Brand"  >
+          <id property="brand_id" column="brand_id" />
+          <result property="brand_name" column="brand_name" />
+       </association>
+       
+       <collection property="sku_versions" ofType="com.sunshine.mall.sale.bean.Sku_Version" >
+          <id property="sku_id"  column="sku2_id" />
+          <result property="sku_name" column="sku2_name"  />
+       </collection>
+       <collection property="product_images"  ofType="com.sunshine.mall.sale.bean.T_Product_Image"  >
+          <id property="image_id" column="image_id" />
+          <result property="image_url"  column="image_url" />
+       </collection>
+       
+       <collection property="sku_attrs" ofType="com.sunshine.mall.sale.bean.Object_Sku_Attr" >
+          <id property="attr_id"  column="attr_id" />
+          <result property="attr_name" column="attr_name" />
+          <result property="attr_value_id"  column="attr_value_id" />
+          <result property="attr_value"  column="attr_value" />
+          <result property="attr_value_name" column="attr_value_name"  />
+       </collection>
+    </resultMap>
+
+</mapper>

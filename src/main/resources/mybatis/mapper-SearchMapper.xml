@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.mall.sale.mapper.SearchMapper">
+
+    <select id="select_brand_by_class_number_2" resultType="com.sunshine.mall.sale.bean.T_Brand" >
+        SELECT  DISTINCT 
+		   b.Id brand_id,b.brand_name
+		FROM 
+		   t_mall_brand b,
+		   t_mall_product spu
+		WHERE
+		   b.Id = spu.brand_id
+		AND 
+		   spu.class_number_2=#{class_number_1}
+    </select>
+
+	<select id="select_sku_info"  resultMap="select_sku_info_resultmap"  >
+	 SELECT 
+	    sku.id sku_id ,sku.sku_name,sku.sku_sales,sku.create_time,sku.price sku_price,
+        spu.id spu_id ,spu.product_image,spu.class_number_1,spu.product_name spu_name,
+        b.id brand_id,b.brand_name
+       <!--  , a.id attr_id ,a.attr_name,av.attr_value,av.attr_value_name -->
+     FROM 
+        t_mall_sku sku,
+        t_mall_product spu,
+        t_mall_brand b
+        <!-- ,
+        t_mall_attr a,
+        t_mall_attr_value av -->
+     WHERE 
+       sku.product_id=spu.Id
+       AND spu.brand_id=b.Id
+      <!--  AND a.Id=av.attr_id
+       AND a.class_number_2=spu.class_number_2 -->
+    
+       AND spu.class_number_2=#{class_number_2}
+	</select>
+	
+	<select id="filter_search_sku"  resultMap="select_sku_info_resultmap">
+	 SELECT 
+	    sku.id sku_id ,sku.sku_name,sku.sku_sales,sku.create_time,sku.price sku_price,
+        spu.id spu_id ,spu.product_image,spu.class_number_1,spu.product_name spu_name,
+        b.id brand_id,b.brand_name
+     FROM 
+        t_mall_sku sku,
+        t_mall_product spu,
+        t_mall_brand b
+     WHERE 
+       sku.product_id=spu.Id
+       AND spu.brand_id=b.Id
+       AND spu.class_number_2=#{class_number_2}
+       <if test="attr_list != null">
+       <foreach collection="attr_list" item="attr"  > 
+       AND sku.id in (
+           SELECT 
+              s.sku_id
+	       FROM  
+	          t_mall_sku_attr_value s
+	       WHERE 
+	          s.attr_value_id in 
+	         <foreach collection="attr.attr_value_list" item="obj_attr_value" open="(" close=")" separator="," >
+	            #{obj_attr_value.attr_value_id}
+	        </foreach>   
+ 	      ) 
+       </foreach>
+       </if>
+       <if test="brand_list !=null">
+         <foreach collection="brand_list" item="brand" open=" AND brand_id in (" close=")" separator="," >
+            #{brand.brand_id}
+         </foreach>
+         </if>
+	</select>
+	
+	<resultMap type="com.sunshine.mall.sale.bean.Model_SKU_SPU_Info" id="select_sku_info_resultmap" autoMapping="true" >
+	    <id property="sku_id"  column="sku_id" />
+	</resultMap>
+</mapper>
