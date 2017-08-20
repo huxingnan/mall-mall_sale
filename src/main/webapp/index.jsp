@@ -13,14 +13,7 @@
 	</script>
 </head>
 <body>
-	<div class="top">
-		<div class="top_text">
-			<a href="">用户登录</a>
-			<a href="">用户注册</a>
-			<a href="">供应商登录</a>
-			<a href="">供应商注册</a>
-		</div>
-	</div>
+	<%@ include file="/WEB-INF/jsp/include/top.jsp" %>
 	<div class="top_img">
 		<img src="${pageContext.request.contextPath }/images/top_img.jpg" alt="">
 	</div>

@@ -9,7 +9,7 @@
    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/> 
 </context:component-scan>
 
-<context:property-placeholder location="classpath:/jdbc.properties"/> 
+<context:property-placeholder location="classpath:jdbc.properties,classpath:userauth.properties"/> 
 
 <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
 <!--    <constructor-arg name="configName" value="cpes"/>  -->
@@ -19,11 +19,15 @@
 		<property name="password" value="${jdbc.password}"/>
 </bean>
 
+ <bean class="com.sunshine.mall.sale.util.UserAuthServiceFactoryBean" >
+   <property name="url" value="${userauth}" />
+   <property name="t" value="com.sunshine.mall.auth.service.UserAuthService" />
+</bean> 
 
 <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
   <property name="dataSource" ref="dataSource"></property>
   <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
-  <property name="typeAliasesPackage" value="com.sunshine.atcrowdfunding"></property>
+  <property name="typeAliasesPackage" value="com.sunshine.mall"></property>
     <property name="mapperLocations">  
      <list > 
       <value>classpath*:/mybatis/mapper-*.xml</value> 

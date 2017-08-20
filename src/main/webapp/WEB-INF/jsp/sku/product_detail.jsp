@@ -6,25 +6,314 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>首页</title>
+	<title>sunshine商城${sku_detail.sku_name}</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/css.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product_attr.css">
+	 <link rel="shortcut icon" href="${pageContext.request.contextPath }/image/small_image/zebre.png" type="image/x-icon" />
+	<style type="text/css" >
+	
+	
+	
+	#settleup {
+	position: absolute;
+	right: 99px;
+	top: 25px
+}
+
+#settleup .cw-icon {
+	width: 188px;
+	height: 33px;
+	background-color: #fff;
+	text-align: center;
+	line-height: 33px
+}
+
+#settleup .cw-icon .iconfont {
+	margin-right: 3px;
+	font-size: 16px;
+	color: #f10214
+}
+
+#settleup .cw-icon a {
+	color: #f10214
+}
+
+#settleup .ci-count {
+	position: absolute;
+	top: 5px;
+	left: 140px;
+	right: auto;
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	padding: 1px;
+	font-size: 12px;
+	line-height: 12px;
+	color: #fff;
+	background-color: #f10215;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	min-width: 12px;
+	text-align: center
+}
+
+#settleup .dorpdown-layer {
+	top: 35px;
+	right: 0;
+	width: 308px
+}
+
+.cart_empty {
+	height: 49px;
+	margin: auto;
+	padding: 10px 0;
+	text-align: center;
+	line-height: 49px;
+	overflow: hidden;
+	color: #999
+}
+
+.cart_empty_img {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+	width: 56px;
+	height: 49px;
+	background-image:
+		url(//img11.360buyimg.com/uba/jfs/t3571/299/131233948/1117/a1196554/58004d6dN2927f0f7.png)
+}
+
+.cart_pop {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	background: #fff
+}
+
+.cart_hd {
+	height: 25px;
+	padding: 6px 8px;
+	line-height: 25px
+}
+
+.cart_bd {
+	background: #fff;
+	height: auto !important;
+	height: 344px;
+	max-height: 344px;
+	overflow-y: auto
+}
+
+.cart_ft {
+	padding: 8px;
+	background: #f5f5f5;
+	text-align: right;
+	_height: 45px;
+	_padding-top: 15px;
+	_padding-bottom: 0
+}
+
+.cart_num {
+	font-weight: 700
+}
+
+.cart_ft_info {
+	float: left;
+	line-height: 29px
+}
+
+.cart_ft_lk {
+	float: right;
+	height: 29px;
+	padding: 0 10px;
+	background: #e4393c;
+	color: #fff;
+	text-align: center;
+	font-weight: 700;
+	line-height: 29px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px
+}
+
+.cart_ft_lk:hover {
+	color: #fff
+}
+
+.cart_giftlist, .cart_manjianlist, .cart_manzenglist, .cart_singlelist,
+	.cart_suitlist {
+	margin-top: -1px
+}
+
+.cart_item {
+	line-height: 17px;
+	vertical-align: bottom;
+	*zoom: 1;
+	background: #fff
+}
+
+.cart_item:hover {
+	background: #f5f5f5
+}
+
+.cart_item_mz {
+	color: #999
+}
+
+.cart_item_mz:hover {
+	background: #fff
+}
+
+.cart_item_hd, .cart_item_inner {
+	padding: 6px 0px;
+	border-top: 1px dotted #ccc;
+	overflow: hidden
+}
+
+.cart_item_hd_info {
+	float: left
+}
+
+.cart_item_hd_price {
+	float: right;
+	margin-left: 10px
+}
+
+.cart_item_hd .cart_tag {
+	float: none
+}
+
+.cart_gift {
+	height: 17px;
+	clear: both;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.cart_gift_lk {
+	color: #999
+}
+
+.cart_gift_jq {
+	color: #999;
+	clear: both
+}
+
+.cart_img {
+	float: left;
+	width: 50px;
+	height: 50px;
+	border: 1px solid #ddd;
+	padding: 0;
+	margin-right: 10px;
+	font-size: 0;
+	overflow: hidden
+}
+
+.cart_img_lk {
+	display: block
+}
+
+.cart_name {
+	float: left;
+	width: 120px;
+	height: 52px;
+	overflow: hidden
+}
+
+.cart_info {
+	float: right;
+	text-align: right;
+	width: 85px
+}
+
+.cart_delete, .cart_price, .cart_tag {
+	float: right;
+	clear: both;
+	max-width: 85px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden
+}
+
+.cart_tag {
+	display: inline-block;
+	margin-bottom: 2px;
+	color: #fff;
+	*zoom: 1;
+	padding: 0 2px;
+	line-height: 16px;
+	vertical-align: top
+}
+
+.cart_tag_orange {
+	background: #f60
+}
+
+.cart_tag_green {
+	background: #3b0
+}
+
+.cart_price {
+	font-weight: 700
+}
+
+.cart_item_hd {
+	overflow: hidden
+}
+
+.cart_suitlist .cart_item_hd {
+	background: #d3ebff
+}
+
+.cart_manjianlist .cart_item_hd, .cart_manjianlist .cart_item_hd:hover,
+	.cart_manzenglist .cart_item_hd, .cart_manzenglist .cart_item_hd:hover
+	{
+	background: #bffab1
+}
+
+.cart_suit_tag {
+	font-weight: 700
+}
+
+.cart_suit_virtual, .cart_suit_virtual .cart_item_hd, .cart_suit_virtual .cart_item_hd:hover,
+	.cart_suit_virtual .cart_item_inner, .cart_suit_virtual .cart_item_inner:hover,
+	.cart_suit_virtual:hover {
+	background: #f7f7f7
+}
+
+.cart_suit_virtual .cart_item_bd {
+	padding: 0 8px
+}
+
+.cart_suit_virtual .cart_item_inner {
+	padding-left: 0;
+	padding-right: 0
+}
+
+.cart_suit_virtual .cart_delete {
+	margin-left: 12px
+}
+
+.cart_suit .cart_num {
+	font-weight: 400
+}
+
+.cart_suit_virtual .cart_num {
+	font-weight: 700
+}
+	</style>
 </head>
 <body>
-	<div class="top">
-		<div class="top_text">
-			<a href="">用户登录</a>
-			<a href="">用户注册</a>
-			<a href="">供应商登录</a>
-			<a href="">供应商注册</a>
-		</div>
-	</div>
+	<%@ include file="/WEB-INF/jsp/include/top.jsp" %>
 	<div class="top_img">
 		<img src="${pageContext.request.contextPath}/images/top_img.jpg" alt="">
 	</div>
 	<div class="w">
     <div id="logo-2014">
-        <a href="${pageContext.request.contextPath}"  class="logo">京东</a>
+        <a href="${pageContext.request.contextPath}" style="background: url(${pageContext.request.contextPath}/images/logo-201305.png) no-repeat 0 0"  class="logo">京东</a>
     </div>
     <div id="search-2014">
         <ul id="shelper" class="hide" style="display: none;"></ul>
@@ -41,7 +330,12 @@
         </div>
         <div class="dorpdown-layer">
         <div class="spacer"></div>
-        <div id="settleup-content"><span class="loading"></span>
+        <style type="text/css" >
+        </style>
+        <div id="settleup-content">
+          
+          <span style="background: url('${pageContext.request.contextPath}/images/loading.gif') no-repeat center center ;" class="loading">
+        </span>
         </div>
         </div>
     </div>
@@ -66,31 +360,11 @@
 								<div class="two_nav">
 									<a href="">11111</a>
 									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
-									<a href="">11111</a>
 								</div>
 							</li>
 							<li><a href="">手机、数码、通信</a></li>
 							<li><a href="">电脑、办公</a></li>
 							<li><a href="">家具、家居、家装</a></li>
-							<li><a href="">男装、女装、内衣</a></li>
-							<li><a href="">个户化妆</a></li>
-							<li><a href="">鞋靴</a></li>
-							<li><a href="">户外运动</a></li>
-							<li><a href="">汽车</a></li>
-							<li><a href="">母婴</a></li>
-							<li><a href="">食品</a></li>
-							<li><a href="">营养保健</a></li>
-							<li><a href="">图书</a></li>
-							<li><a href="">彩票</a></li>
-							<li><a href="">理财</a></li>
 						</ul>
 					</div>
 				</div>
@@ -143,9 +417,9 @@
 	         <div class="dt">选择颜色：</div>
 	          <div class="dd">
 	          <c:forEach items="${sku_detail.sku_versions}" var="sku_version" >
-		      <div class="item  selected" data-sku="${sku_version.sku_id}" data-value="${sku_version.sku_name}" >
+		      <div class='item  <c:if test="${sku_version.sku_id == param.sku_id }" > selected</c:if>' sku_id="${sku_version.sku_id}"   style="cursor: pointer;" onclick="goto_product_detail_page(this)" >
 			  <b></b> 
-			   <a href="javascipt:;" > 
+			   <a href='${pageContext.request.contextPath}/sku/goto_product_detail_page.do?sku_id=${sku_version.sku_id}'   > 
 			<img data-img="1" src="${imagePath}${sku_detail.spu.spu_image}" width="40" height="40" alt="${sku_version.sku_name}">
 				<i>${sku_version.sku_name}</i>
 			</a>
@@ -171,19 +445,25 @@
 	</div>
 </div>
         </div>
-				<div class="clear" style="margin-top:20px;display: inline-block;">
-					<div class="min_t" style="line-height:36px">数量：</div>
-					<div class="num_box">
-						<input type="text" name="num" value="1" style="width:40px;height:32px;text-align:center;float:left">
-						<div class="rg">
-							<img src="${pageContext.request.contextPath}/images/jia.jpg" id='jia' alt="">
-							<img src="${pageContext.request.contextPath}/images/jian.jpg" id='jian' alt="">
-						</div>
+				<div class="clear2" style="margin-top:20px;display: inline-block;">
+					<div class="min_t" style="line-height:36px;display: inline-block;">数量：</div>
+					<div class="num_box"   >
+							<img src="${pageContext.request.contextPath}/images/jia.jpg" id='jia' alt=""  style="float: left ;margin-right: 5px"   >
+							<input type="text" name="num" value="1" style="width:20px;height:20px;text-align:center;float:left">
+							<img src="${pageContext.request.contextPath}/images/jian.jpg" id='jian'  style="float: left;margin-left: 5px"   alt="">
 					</div>
 				</div>
 				<div class="choose-btns clearfix" style="margin-top:20px;">
 					<img src="${pageContext.request.contextPath}/images/mai.jpg"  style="cursor: pointer;" sku_id="${sku_detail.sku_id }"   onclick="alert('a')"  alt="">
-					<img src="${pageContext.request.contextPath}/images/shop.jpg" style="cursor: pointer;" sku_id="${sku_detail.sku_id }" onclick="add_sku_to_cart(this)"  alt="">
+					<img src="${pageContext.request.contextPath}/images/shop.jpg" 
+					style="cursor: pointer;"  
+					sku_name="${sku_detail.sku_name }" 
+					sku_price="${sku_detail.sku_price }"
+					sku_image="${sku_detail.spu.spu_image}" 
+					spu_id="${sku_detail.spu.spu_id }"  
+					sku_id="${sku_detail.sku_id }" 
+					repository_addr="${sku_detail.repository_addr}"
+					onclick="add_sku_to_cart(this)"  alt="">
 				</div>
 			</div>
 		</div>
@@ -238,8 +518,55 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery/jquery-3.2.0.js" ></script>
 
 <script type="text/javascript">
+
+//点击商品 跳转到商品详情页面 
+function goto_product_detail_page(product){
+	//获取sku_id
+	cosole.log(product);
+	var sku_id = $(product).attr("sku_id");
+	//发起页面跳转请求，
+	location.href="${pageContext.request.contextPath}/sku/goto_product_detail_page.do?sku_id="+sku_id;
+	//
+	
+}
+
    function add_sku_to_cart(add_cart_btn){
-	  
+	  //获取sku信息 创建mini购物车
+	  var json={};
+	  var btn=$(add_cart_btn);
+	 var sku_id = btn.attr("sku_id");
+	 var sku_name = btn.attr("sku_name");
+	 var sku_image = btn.attr("sku_image");
+	 var sku_price =btn.attr("sku_price");
+	 var product_id=btn.attr("spu_id");
+	 var repository_addr=btn.attr("repository_addr");
+	 json["sku_id"]=sku_id;
+	 json["sku_name"]=sku_name;
+	 json["product_image"]=sku_image;
+	 json["sku_price"]=sku_price;
+	 json["product_id"]=product_id;
+	 json["number"]=1;
+	 json["repository_addr"]=repository_addr;
+	 json["selected"]="0";
+	 var url="${pageContext.request.contextPath}/cart/add_cart.do";
+	 $.post(url,json,function(data){
+		 //console.log(data);
+		 if(data.success){
+			 console.log("aaa");
+			 alert("添加成功");
+		 }
+	 });
    }
+   $("#settleup-2014 .cw-icon a").unbind();
+   $("#settleup-2014 .cw-icon a").mouseenter(function(){
+	   var url="${pageContext.request.contextPath}/cart/mini_cart_inner.do";
+		 $.post(url,function(data){
+			$("#settleup-content").html(data);
+			
+		 },"html");
+		 
+   });
+   
+
 </script>
 </html>

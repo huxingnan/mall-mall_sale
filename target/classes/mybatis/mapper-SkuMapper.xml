@@ -7,7 +7,7 @@
     <select id="select_sku_by_sku_id"  resultMap="select_sku_by_sku_id_resultMap" >
 			SELECT
 			   sku.Id sku_id,sku.product_amount sku_amount,
-			   sku.price sku_price,sku.sku_name,sku.address,sku.sku_sales,
+			   sku.price sku_price,sku.sku_name,sku.address,sku.sku_sales,sku.address repository_addr,
 			
 			   sku.product_id  spu_id,  spu.product_image spu_image,spu.product_name spu_name,
 			   spu.product_description spu_desc,spu.class_number_1,spu.class_number_2,
@@ -56,6 +56,7 @@
        <result property="sku_name" column="sku_name"  />
        <result property="address" column="address"  />
        <result property="sku_sales" column="sku_sales" />
+       <result property="repository_addr" column="repository_addr" />
        <association property="spu" javaType="com.sunshine.mall.sale.bean.T_Spu" >
           <id property="spu_id" column="spu_id" />
           <result property="spu_image" column="spu_image" />

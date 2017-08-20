@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshine.mall.sale.mapper.CartMapper">
+
+
+  <select id="select_cart_list_by_userId" resultType="com.sunshine.mall.sale.bean.T_cart" >
+       
+        SELECT 
+          * 
+		FROM
+		  t_mall_shoppingcart
+		WHERE
+		  user_id=#{user_id}
+      
+  </select>
+     
+   <update id="update_cart"  >
+     UPDATE
+		t_mall_shoppingcart
+		<if test="updateList != null">
+
+		<foreach collection="updateList" item="cart" open="	SET number = CASE sku_id " close="end" separator=" ">
+		    WHEN #{cart.sku_id} THEN #{cart.number}
+		</foreach>
+		</if>
+	WHERE
+		user_id = #{user_id};
+		      
+       
+   </update>
+
+   <insert id="insert_cart" >
+     INSERT INTO
+      t_mall_shoppingcart
+      (
+		sku_name,
+		sku_price,
+		number,
+		user_id,
+		product_id,
+		create_time,
+		sku_id,
+		product_image,
+		repository_addr
+      ) 
+      
+      VALUES
+    
+        <foreach collection="addList" item="cart" separator="," >
+              (
+        #{cart.sku_name},
+		#{cart.sku_price},
+		#{cart.number},
+		#{user_id},
+		#{cart.product_id},
+		current_timestamp(),
+		#{cart.sku_id},
+		#{cart.product_image},
+		#{cart.repository_addr}
+               )
+        </foreach>
+   </insert>
+
+</mapper>

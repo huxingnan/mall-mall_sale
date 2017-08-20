@@ -15,7 +15,7 @@ public class Model_SKU_Detail  {
 	private String sku_name;
 	private String address;
 	private Integer sku_sales;
-	
+	private String repository_addr;
 	private T_Spu spu;
 	
     private T_Brand brand;
@@ -34,6 +34,23 @@ public class Model_SKU_Detail  {
 				+ ", brand=" + brand + ", sku_versions=" + sku_versions + ", product_images=" + product_images
 				+ ", sku_attrs=" + sku_attrs + "]";
 	}
+
+	
+	
+	
+	public String getRepository_addr() {
+		return repository_addr;
+	}
+
+
+
+
+	public void setRepository_addr(String repository_addr) {
+		this.repository_addr = repository_addr;
+	}
+
+
+
 
 	public Integer getSku_id() {
 		return sku_id;

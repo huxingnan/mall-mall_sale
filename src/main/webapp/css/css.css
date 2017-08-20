@@ -130,12 +130,12 @@ a{text-decoration:none;color: #5A5A5A;font-family: '微软雅黑';font-size: 12p
 .Dbox .box .cent .bg{width: 100%;background: #f7f7f7;float: left;margin-top: 15px}
 .Dbox .box .cent .bg p{width: 50%;font-size: 12px;margin:10px 10px;}
 .Dbox .box .cent .bg p strong{color: #e4393c;font-size: 16px;}
-.Dbox .box .cent .clear{width: 100%;line-height: 24px;float: left;margin-top: 5px;}
-.Dbox .box .cent .clear .min_t{float: left;font-size: 12px;line-height: 26px;}
-.Dbox .box .cent .clear .min_mx{float: left;padding: 0 5px;margin: 0 5px 5px;border: 2px solid #ccc;font-size: 12px;}
-.Dbox .box .cent .clear .num_box{width: 70px;height: 36px;float: left;}
-.Dbox .box .cent .clear .num_box .rg{float: left;width: 18px}
-.Dbox .box .cent .clear .num_box .rg img{float: left;}
+.Dbox .box .cent .clear2{width: 100%;line-height: 24px;float: left;margin-top: 5px;}
+.Dbox .box .cent .clear2 .min_t{float: left;font-size: 12px;line-height: 26px;}
+.Dbox .box .cent .clear2 .min_mx{float: left;padding: 0 5px;margin: 0 5px 5px;border: 2px solid #ccc;font-size: 12px;}
+.Dbox .box .cent .clear2 .num_box{width: 70px;height: 36px;float: left;}
+.Dbox .box .cent .clear2 .num_box .rg{float: left;width: 18px}
+.Dbox .box .cent .clear2 .num_box .rg img{float: left;}
 .Dbox1 .boxbottom{width: 1210px;margin:20px auto;border: 1px solid #CACACA;overflow: hidden;}
 .Dbox1 .boxbottom .top{height: 30px;line-height: 30px;width: 1210px;float: left;background: #f7f7f7}
 .Dbox1 .boxbottom .top span{padding: 0 5px;float: left;font-size: 12px;}
