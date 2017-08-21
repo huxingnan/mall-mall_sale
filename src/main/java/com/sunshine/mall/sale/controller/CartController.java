@@ -15,14 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sunshine.mall.sale.bean.T_User_Count;
 import com.sunshine.mall.sale.bean.T_cart;
 import com.sunshine.mall.sale.const1.CartConst;
 import com.sunshine.mall.sale.const1.UserConst;
+import com.sunshine.mall.sale.service.CartService;
 import com.sunshine.mall.sale.util.MyCookieUtil;
 import com.sunshine.mall.sale.util.MyJsonUtil;
 
@@ -30,19 +33,45 @@ import com.sunshine.mall.sale.util.MyJsonUtil;
 @Controller
 public class CartController {
    
+	@Autowired
+	private CartService cartService;
+	
 	@RequestMapping("/mini_cart_inner")
-	public String display_mini_cart(HttpServletRequest request,ModelMap map) {
+	public String display_mini_cart(HttpServletRequest request,HttpSession session,ModelMap map) {
 		
-		Cookie[] cookies = request.getCookies();
 		
-		String cartjson = MyCookieUtil.getCooKie(cookies, CartConst.SHOPING_CART);
-		if(StringUtils.isBlank(cartjson)) {
-			map.put("isNull", 1);
-		}else {
-			map.put("isNull", 0);
-			try {
-				cartjson=URLDecoder.decode(cartjson, "utf-8");
-				List<T_cart> cart_list = MyJsonUtil.jsonToObjList(cartjson, T_cart.class);
+		T_User_Count user =(T_User_Count) session.getAttribute(UserConst.USER);
+		if(user == null) {
+			//如果未登录 
+			Cookie[] cookies = request.getCookies();
+			String cartjson = MyCookieUtil.getCooKie(cookies, CartConst.SHOPING_CART);
+			if(StringUtils.isBlank(cartjson)) {
+				map.put("isNull", 1);
+			}else {
+				map.put("isNull", 0);
+				try {
+					cartjson=URLDecoder.decode(cartjson, "utf-8");
+					List<T_cart> cart_list = MyJsonUtil.jsonToObjList(cartjson, T_cart.class);
+					BigDecimal totalAmount =new BigDecimal("0");
+					Integer totalNum=0;
+					for (T_cart t_cart : cart_list) {
+						totalAmount=totalAmount.add(t_cart.getAmount());
+						totalNum+=t_cart.getNumber();
+					}
+					map.put("totalAmount", totalAmount);
+					map.put("totalNum", totalNum);
+					map.put(CartConst.SHOPING_CART, cart_list);
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			//如果登陆
+			List<T_cart> cart_list =(List<T_cart>)session.getAttribute(CartConst.SHOPING_CART);
+			if(cart_list.size() == 0) {
+				map.put("isNull", 1);
+			}else {
+				map.put("isNull", 0);
 				BigDecimal totalAmount =new BigDecimal("0");
 				Integer totalNum=0;
 				for (T_cart t_cart : cart_list) {
@@ -52,21 +81,32 @@ public class CartController {
 				map.put("totalAmount", totalAmount);
 				map.put("totalNum", totalNum);
 				map.put(CartConst.SHOPING_CART, cart_list);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
 			}
+			
 		}
 		
 		return "/cart/mini_cart_inner";
 	}
 	
+	
+	@RequestMapping("/delete_cart_item")
+	public String  delete_cart_item(Integer sku_id,HttpSession session,HttpServletRequest request) {
+	 
+	     cartService.remove_cart_from_cartList(sku_id,session,request);
+		   
+	    return "redirect:/cart/cart";
+	
+	}
+	
+
+
 	@ResponseBody
 	@RequestMapping("/add_cart")
 	public Object add_cart(T_cart cart,HttpServletRequest request,HttpServletResponse response,HttpSession session) {
 		//更新购物车项 金额
 		 updateCartAmount(cart);
 		//获取登陆用户
-		Object user = session.getAttribute(UserConst.USER);
+		 T_User_Count user = (T_User_Count)session.getAttribute(UserConst.USER);
 		//创建空购物车
 		List<T_cart> cart_list = new ArrayList<T_cart>();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -115,9 +155,17 @@ public class CartController {
 			 response.addCookie(cookie);
 		}else {
 			//用户登录 状态  购物车持久化 到 DB 并将 购物车存放在 session
-			
+			 cart_list =(List<T_cart>) session.getAttribute(CartConst.SHOPING_CART);
+			boolean newSku= isNewSku(cart_list,cart);
+			if(newSku) {
+				cartService.save_cart(cart,user.getId());
+				cart_list.add(cart);
+			}else {
+				cart.setUser_id(user.getId());
+				cartService.update_cart(cart);
+				updateCartItemNumber(cart_list,cart);
+			}
 		}
-		
 		return map;
 	}
 

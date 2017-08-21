@@ -5,6 +5,57 @@
 <mapper namespace="com.sunshine.mall.sale.mapper.CartMapper">
 
 
+<delete id="delete_cartItem_by_sku_id_and_user_id">
+   delete
+   from 
+   t_mall_shoppingcart
+   where user_id=#{user_id}
+   and sku_id=#{sku_id}
+   
+</delete>
+
+<update id="update_cart_item"  parameterType="com.sunshine.mall.sale.bean.T_cart">
+    update
+    t_mall_shoppingcart
+    set
+    number=#{number}
+    where sku_id=#{sku_id}
+    and user_id =#{user_id}
+</update>
+
+<insert id="insert_cart_item">
+
+
+
+    INSERT INTO
+      t_mall_shoppingcart
+      (
+		sku_name,
+		sku_price,
+		number,
+		amount
+		user_id,
+		product_id,
+		create_time,
+		sku_id,
+		product_image,
+		repository_addr
+      ) 
+      VALUES
+            (
+        #{cart.sku_name},
+		#{cart.sku_price},
+		#{cart.number},
+		#{cart.amount}
+		#{user_id},
+		#{cart.product_id},
+		current_timestamp(),
+		#{cart.sku_id},
+		#{cart.product_image},
+		#{cart.repository_addr}
+               )
+</insert>
+
   <select id="select_cart_list_by_userId" resultType="com.sunshine.mall.sale.bean.T_cart" >
        
         SELECT 
@@ -38,6 +89,7 @@
 		sku_name,
 		sku_price,
 		number,
+		amount,
 		user_id,
 		product_id,
 		create_time,
@@ -53,6 +105,7 @@
         #{cart.sku_name},
 		#{cart.sku_price},
 		#{cart.number},
+		#{cart.amount},
 		#{user_id},
 		#{cart.product_id},
 		current_timestamp(),

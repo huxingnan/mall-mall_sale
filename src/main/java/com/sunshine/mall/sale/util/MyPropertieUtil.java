@@ -32,6 +32,12 @@ public class MyPropertieUtil {
 		return path;
 	}
 	
+	public static String getKey(String filename) {
+		
+		return filename;
+		
+	}
+	
 	public static String getKey(String filename,String key) {
 		
 		InputStream inStream = null;

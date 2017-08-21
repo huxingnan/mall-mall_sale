@@ -42,6 +42,14 @@ public class UserController {
 	private static final String FAILED = "false";
 	private static final String SUCCESS = "true";
 
+	@RequestMapping("/goto_logout")
+	public String goto_logout(HttpSession session) {
+		
+		session.invalidate();
+		String contextPath = session.getServletContext().getContextPath();
+		return "redirect:/";
+	}
+	
 	@ResponseBody
 	@RequestMapping("/login")
 	public Object login(T_User_Count user, HttpServletRequest request, HttpSession session,

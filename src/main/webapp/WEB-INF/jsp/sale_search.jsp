@@ -8,7 +8,8 @@
 	<title>sunshine商城>${class_info.class_name_1 }>${class_info.class_name_2 }</title>
 	  <link rel="shortcut icon" href="${pageContext.request.contextPath }/image/small_image/zebre.png" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css.css">
-
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product_attr.css">
+  	<script type="text/javascript" src='${pageContext.request.contextPath }/js/jquery/jquery-3.2.0.js'></script>
 <style type="text/css">
   .Sscreen .list .isSelected{
     background-color: rgb(241, 241, 241);
@@ -23,7 +24,8 @@
 	<div class="top_img">
 		<img src="${pageContext.request.contextPath }/images/top_img.jpg" alt="">
 	</div>
-	<div class="search">
+	<%@ include file="/WEB-INF/jsp/include/search_input.jsp" %>
+	<%-- <div class="search">
 		<div class="logo"><img src="${pageContext.request.contextPath }/images/logo.jpg" alt=""></div>
 		<div class="search_on">
 			<div class="se">
@@ -86,7 +88,7 @@
 			</div>
 			
 		</div>
-	</div>
+	</div> --%>
 	<div class="menu">
 		<div class="nav">
 			<div class="navs">
@@ -198,7 +200,6 @@
 		   
 		</div>
 </body>
-<script type="text/javascript" src='${pageContext.request.contextPath }/js/jquery/jquery-3.2.0.js'></script>
 <script type="text/javascript" >
     //var class_number_2 = '${class_number_2}';
     function search_by_sku_attr(attr){
